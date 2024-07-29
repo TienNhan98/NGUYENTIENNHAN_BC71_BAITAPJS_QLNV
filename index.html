@@ -156,7 +156,10 @@
                       id="searchName"
                     />
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="btnTimNV"
+                      <span
+                        class="input-group-text"
+                        id="btnTimNV"
+                        onclick="timNV()"
                         ><i class="fa fa-search"></i
                       ></span>
                     </div>
@@ -201,7 +204,7 @@
     <!-- The Modal -->
     <div class="modal fade" id="myModal">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" id="my__Modal">
           <header class="head-form mb-0">
             <h2 id="header-title">Log In</h2>
           </header>
@@ -372,7 +375,12 @@
             >
               Thêm người dùng
             </button>
-            <button id="btnCapNhat" type="button" class="btn btn-success">
+            <button
+              id="btnCapNhat"
+              type="button"
+              class="btn btn-success"
+              onclick="capNhatNV()"
+            >
               Cập nhật
             </button>
             <button
@@ -389,6 +397,7 @@
     </div>
     <!-- JS -->
     <script src="./model.js"></script>
+    <script src="./validate.js"></script>
     <script src="./controller.js"></script>
     <script src="./index.js"></script>
     <!-- Bootstrap -->

@@ -20,6 +20,28 @@ render();
 function themNV() {
   //   alert(123);
   var nv = info();
+  var value = [
+    nv.taiKhoan,
+    nv.hoTen,
+    nv.email,
+    nv.matKhau,
+    nv.ngayLam,
+    nv.luongCB,
+    nv.chucVu,
+    nv.gioLam,
+  ];
+  var idErr = [
+    "tbTKNV",
+    "tbTen",
+    "tbEmail",
+    "tbMatKhau",
+    "tbNgay",
+    "tbLuongCB",
+    "tbChucVu",
+    "tbGiolam",
+  ];
+  var isValid = kiemTraRong(value, idErr) & kiemTraTrung(nv.taiKhoan, DSNV);
+  if (!isValid) return;
   DSNV.push(nv);
   var JSON_DSNV = JSON.stringify(DSNV);
   localStorage.setItem("JSON_DSNV", JSON_DSNV);
@@ -45,7 +67,7 @@ function render() {
                             <button type="button" class="btn btn-primary"
                             style="color: #FFB90F" onclick="suaNV('${
                               nv.taiKhoan
-                            }')">Sửa</button>
+                            }')" data-toggle="modal" data-target="#myModal">Sửa</button>
                         </td>
                         
                     </tr>`;
@@ -82,4 +104,56 @@ function suaNV(taiKhoan) {
     document.getElementById("chucvu").value = nvSua.chucVu;
     document.getElementById("gioLam").value = nvSua.gioLam;
   }
+}
+
+function capNhatNV() {
+  var nvCapNhat = info();
+  var viTri = DSNV.findIndex(function (itemNV) {
+    return itemNV.taiKhoan == nvCapNhat.taiKhoan;
+  });
+  if (viTri != -1) {
+    DSNV[viTri] = nvCapNhat;
+    var JSON_DSNV = JSON.stringify(DSNV);
+    localStorage.setItem("JSON_DSNV", JSON_DSNV);
+    render();
+    document.getElementById("btnCapNhat").setAttribute("data-dismiss", "modal");
+  }
+}
+
+function timNV() {
+  var loaiNV = document.getElementById("searchName").value.trim();
+  if (loaiNV === "") {
+    render();
+    return;
+  }
+
+  var dsLoaiNv = DSNV.filter(function (itemNV) {
+    return itemNV.xepLoai().trim() == loaiNV;
+  });
+
+  var danhSachHTML = "";
+  for (var index = 0; index < dsLoaiNv.length; index++) {
+    var nv = dsLoaiNv[index];
+    var trString = `<tr>
+                        <td>${nv.taiKhoan}</td>
+                        <td>${nv.hoTen}</td>
+                        <td>${nv.email}</td>
+                        <td>${nv.ngayLam}</td>
+                        <td>${nv.chucVu}</td>
+                        <td>${nv.tinhTongLuong()}</td>
+                        <td>${nv.xepLoai()}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary mb-2" style="color:#FF0000" onclick="xoaNV('${
+                              nv.taiKhoan
+                            }')">Xóa</button>
+                            <button type="button" class="btn btn-primary"
+                            style="color: #FFB90F" onclick="suaNV('${
+                              nv.taiKhoan
+                            }')" data-toggle="modal" data-target="#myModal">Sửa</button>
+                        </td>
+                    </tr>`;
+    danhSachHTML += trString;
+  }
+
+  document.getElementById("tableDanhSach").innerHTML = danhSachHTML;
 }

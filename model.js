@@ -29,13 +29,13 @@ function nhanVien(
   };
   this.xepLoai = function () {
     if (this.gioLam >= 192) {
-      return "Nhân Viên Xuất Sắc ";
+      return "Nhân Viên Xuất Sắc";
     } else if (this.gioLam >= 176) {
-      return " Nhân Viên Giỏi";
+      return "Nhân Viên Giỏi";
     } else if (this.gioLam >= 160) {
-      return " Nhân Viên Khá";
+      return "Nhân Viên Khá";
     } else {
-      return " Nhân Viên Trung Bình";
+      return "Nhân Viên Trung Bình";
     }
   };
 }
