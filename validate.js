@@ -19,8 +19,8 @@ function kiemTraTrung(value, arrNV) {
     return itemNV.taiKhoan === value;
   });
   if (viTri !== -1) {
-    document.getElementById("tbTKNV").style.display = "block";
-    document.getElementById("tbTKNV").innerText =
+    document.getElementById("tbTKNV2").style.display = "block";
+    document.getElementById("tbTKNV2").innerText =
       "Tài Khoản bị trùng, vui lòng kiểm tra lại";
     return false;
   }

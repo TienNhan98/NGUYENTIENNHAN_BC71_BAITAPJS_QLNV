@@ -41,9 +41,8 @@ function themNV() {
     "tbGiolam",
   ];
   var isValid =
+    kiemTraRong(value, idErr) &
     kiemTraTrung(nv.taiKhoan, DSNV) &
-    console.log("🚀 ~ themNV ~ kiemTraTrung:", DSNV);
-  kiemTraRong(value, idErr) &
     kiemTraTaiKhoan(nv.taiKhoan) &
     kiemTraHoTen(nv.hoTen) &
     kiemTraEmail(nv.email) &
@@ -52,7 +51,10 @@ function themNV() {
     kiemTraLuong(nv.luongCB) &
     kiemTraChucVu(nv.chucVu) &
     kiemTraGioLam(nv.gioLam);
-  if (!isValid) return;
+  if (!isValid) {
+    alert("Vui Lòng kiểm tra lại thông tin đã nhập ");
+    return;
+  }
   DSNV.push(nv);
   var JSON_DSNV = JSON.stringify(DSNV);
   localStorage.setItem("JSON_DSNV", JSON_DSNV);
@@ -69,7 +71,7 @@ function render() {
                         <td>${nv.email}</td>
                         <td>${nv.ngayLam}</td>
                         <td>${nv.chucVu}</td>
-                        <td>${nv.tinhTongLuong()}</td>
+                        <td>${nv.tinhTongLuong().toLocaleString()}</td>
                         <td>${nv.xepLoai()}</td>
                         <td>
                             <button type="button" class="btn btn-primary mb-2" style="color:#FF0000" onclick="xoaNV('${
@@ -163,14 +165,14 @@ function capNhatNV() {
 }
 
 function timNV() {
-  var loaiNV = document.getElementById("searchName").value.trim();
+  var loaiNV = document.getElementById("searchName").value.trim().toLowerCase();
   if (loaiNV === "") {
     render();
     return;
   }
 
   var dsLoaiNv = DSNV.filter(function (itemNV) {
-    return itemNV.xepLoai().trim() == loaiNV;
+    return itemNV.xepLoai().trim().toLowerCase() == loaiNV;
   });
 
   var danhSachHTML = "";
@@ -182,7 +184,7 @@ function timNV() {
                         <td>${nv.email}</td>
                         <td>${nv.ngayLam}</td>
                         <td>${nv.chucVu}</td>
-                        <td>${nv.tinhTongLuong()}</td>
+                        <td>${nv.tinhTongLuong().toLocaleString()}</td>
                         <td>${nv.xepLoai()}</td>
                         <td>
                             <button type="button" class="btn btn-primary mb-2" style="color:#FF0000" onclick="xoaNV('${
