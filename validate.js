@@ -16,9 +16,9 @@ function kiemTraRong(value, idErr) {
 
 function kiemTraTrung(value, arrNV) {
   var viTri = arrNV.findIndex(function (itemNV) {
-    return itemNV.taiKhoan == value;
+    return itemNV.taiKhoan === value;
   });
-  if (viTri != -1) {
+  if (viTri !== -1) {
     document.getElementById("tbTKNV").style.display = "block";
     document.getElementById("tbTKNV").innerText =
       "Tài Khoản bị trùng, vui lòng kiểm tra lại";

@@ -42,7 +42,8 @@ function themNV() {
   ];
   var isValid =
     kiemTraTrung(nv.taiKhoan, DSNV) &
-    kiemTraRong(value, idErr) &
+    console.log("🚀 ~ themNV ~ kiemTraTrung:", DSNV);
+  kiemTraRong(value, idErr) &
     kiemTraTaiKhoan(nv.taiKhoan) &
     kiemTraHoTen(nv.hoTen) &
     kiemTraEmail(nv.email) &
@@ -122,39 +123,38 @@ function capNhatNV() {
     return itemNV.taiKhoan == nvCapNhat.taiKhoan;
   });
   if (viTri != -1) {
+    var value = [
+      nvCapNhat.taiKhoan,
+      nvCapNhat.hoTen,
+      nvCapNhat.email,
+      nvCapNhat.matKhau,
+      nvCapNhat.ngayLam,
+      nvCapNhat.luongCB,
+      nvCapNhat.chucVu,
+      nvCapNhat.gioLam,
+    ];
+    var idErr = [
+      "tbTKNV",
+      "tbTen",
+      "tbEmail",
+      "tbMatKhau",
+      "tbNgay",
+      "tbLuongCB",
+      "tbChucVu",
+      "tbGiolam",
+    ];
+    var isValid =
+      kiemTraRong(value, idErr) &
+      kiemTraTaiKhoan(nvCapNhat.taiKhoan) &
+      kiemTraHoTen(nvCapNhat.hoTen) &
+      kiemTraEmail(nvCapNhat.email) &
+      kiemTraMatKhau(nvCapNhat.matKhau) &
+      kiemTraNgay(nvCapNhat.ngayLam) &
+      kiemTraLuong(nvCapNhat.luongCB) &
+      kiemTraChucVu(nvCapNhat.chucVu) &
+      kiemTraGioLam(nvCapNhat.gioLam);
+    if (!isValid) return;
     DSNV[viTri] = nvCapNhat;
-    // var value = [
-    //   nv.taiKhoan,
-    //   nv.hoTen,
-    //   nv.email,
-    //   nv.matKhau,
-    //   nv.ngayLam,
-    //   nv.luongCB,
-    //   nv.chucVu,
-    //   nv.gioLam,
-    // ];
-    // var idErr = [
-    //   "tbTKNV",
-    //   "tbTen",
-    //   "tbEmail",
-    //   "tbMatKhau",
-    //   "tbNgay",
-    //   "tbLuongCB",
-    //   "tbChucVu",
-    //   "tbGiolam",
-    // ];
-    // var isValid =
-    //   kiemTraTrung(nv.taiKhoan, DSNV) &
-    //   kiemTraTaiKhoan(nv.taiKhoan) &
-    //   kiemTraHoTen(nv.hoTen) &
-    //   kiemTraEmail(nv.email) &
-    //   kiemTraMatKhau(nv.matKhau) &
-    //   kiemTraNgay(nv.ngayLam) &
-    //   kiemTraLuong(nv.luongCB) &
-    //   kiemTraChucVu(nv.chucVu) &
-    //   kiemTraGioLam(nv.gioLam) &
-    //   kiemTraRong(value, idErr);
-    // if (!isValid) return;
     var JSON_DSNV = JSON.stringify(DSNV);
     localStorage.setItem("JSON_DSNV", JSON_DSNV);
     render();
